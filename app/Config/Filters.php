@@ -67,9 +67,11 @@ class Filters extends BaseConfig
 				'Home/*',
 				'Logout/*',
 				'User/*',
-				'getUser/*',
-				'updateUser/*',
-				'deleteUser/*',
+				'GetUser/*',
+				'UpdateUser/*',
+				'DeleteUser/*',
+				'GetResponsibility/*',
+				'Responsibility/*'
 			],
         ]
 	];

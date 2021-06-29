@@ -11,7 +11,8 @@ class HomeController extends BaseController
 	public function index()
 	{
         $view = "Home";
-        $layout = $this->Layout($view);
+		$data[''] = null;
+        $layout = $this->Layout($view,$data);
 	}
 
 }

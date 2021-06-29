@@ -34,3 +34,9 @@
 .mini-right-pad{
     margin-right:5px !important;
 }
+.margin-15px{
+    margin:15px !important;
+}
+.margin-15px label input{
+    cursor: pointer !important;
+}

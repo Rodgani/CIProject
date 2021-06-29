@@ -10,7 +10,7 @@ $(document).ready(function() {
           'serverSide': true,
           'serverMethod': 'post',
           'ajax': {
-          'url':'getUser',
+          'url':'GetUser',
           "data": {"access_token": csrfHash},
           },
           'columns': [
@@ -97,7 +97,7 @@ $(document).ready(function() {
         const levelaccess = $("#selAccess").val();
        
         $.ajax({
-            url: "updateUser",
+            url: "UpdateUser",
             type: "POST",
             data: {
                 access_token: csrfHash,
@@ -144,7 +144,7 @@ $(document).ready(function() {
           .then((willDelete) => {
             if (willDelete) {
               $.ajax({
-                url: "deleteUser",
+                url: "DeleteUser",
                 type: "POST",
                 data: {
                     access_token: csrfHash,
