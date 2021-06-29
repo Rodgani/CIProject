@@ -11,7 +11,7 @@
             <div id="formContent">
                 <!-- Tabs Titles -->
                 <div class="title">
-                    <h2>SOLID WASTE MANAGEMENT SYSTEM</h2>
+                    <h2>EMB WORK FINANCIAL PLAN SYSTEM</h2>
                 </div>
                 <!-- Icon -->
                 <div>
@@ -20,7 +20,7 @@
 
                 <!-- Login Form -->
                 <form>
-                    <input type="text" id="txtUsername" placeholder="Username">
+                    <input type="text" id="txtEmail" placeholder="Email">
                     <input type="password" id="txtPassword" placeholder="Password">
                     <input type="button" value="Log In" id="btnSubmit">
                 </form>
@@ -36,6 +36,7 @@
      
     <script  src = "<?php echo base_url();  ?>/assets/js/bootstrap.bundle.min.js"></script>
     <!-- <script  src = "<?php echo base_url();  ?>/assets/dist/js/jquery-development.js"></script> -->
-    <script src="<?php echo base_url();  ?>/assets/vendor/jquery/jquery.min.js"></script>
-    <script  src = "<?php echo base_url();  ?>/assets/js/modules/Login.js"></script>
+    <script src="<?php echo base_url();  ?>/assets/assets/jquery/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script  src = "<?php echo base_url();  ?>/assets/js/modules/login/Login.js"></script>
 </html>

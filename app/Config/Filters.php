@@ -65,8 +65,11 @@ class Filters extends BaseConfig
 			'before' => [
 				'UserLogin/*',
 				'Home/*',
-				'Logout*',
-				'User*'
+				'Logout/*',
+				'User/*',
+				'getUser/*',
+				'updateUser/*',
+				'deleteUser/*',
 			],
         ]
 	];

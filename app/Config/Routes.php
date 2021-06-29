@@ -52,6 +52,15 @@ if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
-
+/*user routes*/
 $routes->post('UserLogin', 'LoginController::Login');
 $routes->get('User', 'Users/UserController::index');
+$routes->post('User', 'Users/UserController::register');
+$routes->post('updateUser', 'Users/UserController::update');
+$routes->post('getUser', 'Users/UserController::getUser');
+$routes->post('deleteUser', 'Users/UserController::delete');
+/*user routes*/
+
+/*responsibility routes*/
+
+/*responsibility routes*/
