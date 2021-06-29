@@ -103,14 +103,14 @@ class BaseController extends Controller
 		->setJSON($responseBody);
 	}
 
-	public function Layout($path){
+	public function Layout($path,$data){
         
         if(!isset($_SESSION['login'])){
 			echo "<script>window.location.href='".base_url()."'</script>";
         }else{
             echo view('Layout/Header');
 			echo view('Layout/Sidebar');
-			echo view($path);
+			echo view($path,$data);
             echo view('Layout/Footer');
         }
     }

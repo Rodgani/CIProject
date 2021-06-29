@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Users;
 use App\Models\User\UserModel;
+use App\Models\User\ResponsibilityModel;
+use App\Models\User\ModulesModel;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
@@ -13,7 +15,7 @@ class UserController extends BaseController
 	public function index()
 	{
 		$view = "User/UserView";
-        $layout = $this->Layout($view);
+        $layout = $this->Layout($view,null);
 	}
 
 	public function register()
@@ -168,4 +170,108 @@ class UserController extends BaseController
         }
 	}
 
+	public function responsibility(){
+		$builder = new ModulesModel();
+
+		$builder->like('code', '1U');
+		$data['userLinks'] = $builder->get()->getResultArray();
+
+		$view = "User/ResponsibilityView";
+        $layout = $this->Layout($view,$data);
+	}
+
+	public function getResponsibility(){
+		$response = array();
+		## Read value
+		$postData = $this->getRequestInput($this->request);
+
+		$draw = $postData['draw'];
+		$start = $postData['start'];
+		$rowperpage = $postData['length']; // Rows display per page
+		$columnIndex = $postData['order'][0]['column']; // Column index
+		$columnName = $postData['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+		$searchValue = $postData['search']['value']; // Search value
+
+		$builder = new ResponsibilityModel();
+		$searchQuery = "";
+
+		if($searchValue != ''){
+			$searchQuery = " (responsibility_name like '%".$searchValue."%') ";
+		}
+
+		$count_no_filter = $builder->countAll();
+		$totalRecords = $count_no_filter;
+
+	
+		if($searchQuery != ''){
+			$builder->where($searchQuery);
+		}
+		$count_with_filter = $builder->countAll();
+		$totalRecordwithFilter = $count_with_filter;
+		
+		$data = array();
+		
+
+		if($searchQuery != ''){
+			$builder->where($searchQuery);
+		}
+
+		$builder->orderBy($columnName, $columnSortOrder);
+		$builder->limit($rowperpage,$start);
+		$getRes = $builder->get();
+
+		foreach ($getRes->getResult() as $row)
+		{
+			$data[] = array( 
+				"id"=>$row->id,
+				"responsibility_name"=>$row->responsibility_name,
+				"responsibility_ff"=>$row->responsibility_ff
+			); 
+		}
+
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		return json_encode($response); 
+	}
+
+	public function insertResponsibility(){
+		
+		$rules = [
+            'responsibility_name' => 'required|is_unique[responsibility.responsibility_name]',
+            'responsibility_ff' => 'required'
+        ];
+
+        $input = $this->getRequestInput($this->request);
+
+        if (!$this->validateRequest($input, $rules)) {
+            return $this
+                ->getResponse(
+                    $this->validator->getErrors(),
+                    ResponseInterface::HTTP_BAD_REQUEST
+                );
+        }
+
+        $resModel = new ResponsibilityModel();
+        $resModel->save($input);
+
+		$id = $resModel->insertID;
+
+		if($id<>null){
+			$responsibility =  $input['responsibility_name'];
+		}
+
+       	return $this
+			->getResponse(
+				[
+					'message' => 'added successfully',
+					'res' => $responsibility
+				]
+			);
+	}
 }

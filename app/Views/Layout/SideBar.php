@@ -43,7 +43,7 @@
                     <h6 class="collapse-header">Users Setting:</h6>
                     <a class="collapse-item" href="User">Users</a>
                     <a class="collapse-item" href="forgot-password.html">Profile</a>
-                    <a class="collapse-item" href="register.html">Responsibility</a>
+                    <a class="collapse-item" href="Responsibility">Responsibility</a>
                 </div>
             </div>
         </li>

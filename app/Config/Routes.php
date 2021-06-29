@@ -56,11 +56,13 @@ if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 $routes->post('UserLogin', 'LoginController::Login');
 $routes->get('User', 'Users/UserController::index');
 $routes->post('User', 'Users/UserController::register');
-$routes->post('updateUser', 'Users/UserController::update');
-$routes->post('getUser', 'Users/UserController::getUser');
-$routes->post('deleteUser', 'Users/UserController::delete');
+$routes->post('UpdateUser', 'Users/UserController::update');
+$routes->post('GetUser', 'Users/UserController::getUser');
+$routes->post('DeleteUser', 'Users/UserController::delete');
 /*user routes*/
 
 /*responsibility routes*/
-
+$routes->get('Responsibility', 'Users/UserController::responsibility');
+$routes->post('GetResponsibility', 'Users/UserController::getResponsibility');
+$routes->post('Responsibility', 'Users/UserController::insertResponsibility');
 /*responsibility routes*/
