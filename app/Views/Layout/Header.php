@@ -11,7 +11,12 @@
         <link href="<?php echo base_url(); ?>/assets/css/custom-style.css" rel="stylesheet">
         <link href="<?php echo base_url(); ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="<?php echo base_url(); ?>/assets/css/sb-admin-2.css" rel="stylesheet">
-        <link href="<?php echo base_url(); ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>/assets/assets/fontawesome-free/css/all.min.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>/assets/assets/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+       
+        <script src="<?php echo base_url();  ?>/assets/assets/jquery/jquery.min.js"></script>
+       
+
     </head>
 <body>
 

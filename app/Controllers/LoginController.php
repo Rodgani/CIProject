@@ -5,6 +5,7 @@ use App\Models\User\UserModel;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
+use ReflectionException;
 class LoginController extends BaseController
 {
 
@@ -18,16 +19,28 @@ class LoginController extends BaseController
 
 	public function Login(){
 		
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		
+		 $rules = [
+            'email' => 'required|min_length[6]|max_length[50]|valid_email',
+            'password' => 'required|min_length[8]|max_length[255]|validateUser[email, password]'
+        ];
+
+        $input = $this->getRequestInput($this->request);
+
+        if (!$this->validateRequest($input, $rules)) {
+            return $this
+                ->getResponse(
+                    $this->validator->getErrors(),
+                    ResponseInterface::HTTP_BAD_REQUEST
+                );
+        }
+	
 		try{
 			$model = new UserModel();
-			$user = $model->getUser($username,$password);
+			$user = $model->getUser($input['email']);
 
-			$_SESSION['responsibility_id'] = $user['responsibility_id'];
-			$_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['login'] = TRUE;
+			$_SESSION['responsibility'] = $user['responsibility'];
+			$_SESSION['iis_employee_number'] = $user['iis_employee_number'];
+	     	$_SESSION['login'] = TRUE;
 			
 			return $this
 			->getResponse(
@@ -45,13 +58,14 @@ class LoginController extends BaseController
 				],
 			);
 		}
+
 	}
 	
 	public function Logout(){
 		
 		if(isset($_SESSION['login'])){
 				
-			$array_items = ['name', 'user_id','responsibility_id','login'];
+			$array_items = ['iis_employee_number','responsibility','login'];
 			$this->session->remove($array_items);
 
 			//$this->session->sess_destroy();

@@ -36,22 +36,35 @@
             </div>
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="Logout">Logout</a>
+                <button class="btn btn-sm btn-secondary shadow-sm" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-sm btn-primary shadow-sm" href="Logout">Logout</a>
             </div>
         </div>
     </div>
 </div>
         </body>
-        <script src="<?php echo base_url();  ?>/assets/vendor/jquery/jquery.min.js"></script>
-        <script src="<?php echo base_url();  ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Core plugin JavaScript-->
-        <script src="<?php echo base_url();  ?>/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+       
+        <script>
+            $(document).ready(function() {
+                $('.alert').hide();
+            });
+            function number(t){
+                t.value=t.value.replace(/[^0-9]/g, '');
+            }
+        </script>
 
         <!-- Custom scripts for all pages-->
         <script src="<?php echo base_url();  ?>/assets/js/sb-admin-2.min.js"></script>
+        
+        <script src="<?php echo base_url();  ?>/assets/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+        <!-- Core plugin JavaScript-->
+        <script src="<?php echo base_url();  ?>/assets/assets/jquery-easing/jquery.easing.min.js"></script>
+
+         <!-- datatables -->
+        <script src="<?php echo base_url();  ?>/assets/assets/datatables/jquery.dataTables.min.js"></script>
+        <script src="<?php echo base_url();  ?>/assets/assets/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!-- Page level plugins -->
         <!-- <script src="<?php echo base_url();  ?>vendor/chart.js/Chart.min.js"></script> -->
 

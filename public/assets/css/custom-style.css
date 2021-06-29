@@ -8,3 +8,29 @@
 .action-center{
     text-align: center;
 }
+.alert-success-cus{
+    width: 100%;
+    background-color: #1cc88a !important;
+    transition: 0.3s;
+    color: white !important;
+    text-align: center !important;
+}
+.alert-message{
+    margin: 0px !important;
+}
+.modal-header{
+    background-color: #1cc88a !important;
+}
+.modal-title{
+    color: white !important;
+}
+.alert-error-cus{
+    width: 100%;
+    background-color: #c02d2d !important;
+    transition: 0.3s;
+    color: white !important;
+    text-align: center !important;
+}
+.mini-right-pad{
+    margin-right:5px !important;
+}
