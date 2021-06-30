@@ -64,5 +64,6 @@ $routes->post('DeleteUser', 'Users/UserController::delete');
 /*responsibility routes*/
 $routes->get('Responsibility', 'Users/UserController::responsibility');
 $routes->post('GetResponsibility', 'Users/UserController::getResponsibility');
-$routes->post('Responsibility', 'Users/UserController::insertResponsibility');
+$routes->post('Responsibility', 'Users/UserController::insertUpdateResponsibility');
+$routes->post('DeleteResponsibility', 'Users/UserController::deleteResponsibility');
 /*responsibility routes*/

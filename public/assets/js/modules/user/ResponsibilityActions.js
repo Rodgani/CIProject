@@ -27,26 +27,16 @@ $(document).ready(function() {
           ],
     });
 
-    var chkUser = true;
-    $('.chkUsers').each(function(i, obj) {
-        if (i != 0) {
-            if ($(this).prop('checked') == false) {
-                chkUser= false;
-            }
-        }
+    $("#btnAddModal").click(function(){
+       $("#txtResID").val('');
+       $("#txtResName").val('');
+       $("input[name=chkFormFunction]").prop( "checked", false );
     });
-
-    if (chkUser) {
-        $('#chkUsersID').prop('checked', true);
-    }
-    else {
-        $('#chkUsersID').prop('checked', false);
-    }
-
     $( "#btnAdd" ).click(function() {
         const res = $("#txtResName").val();
+        const resid = $("#txtResID").val();
         var form ="";
-        $('.chkUsers').each(function(index) {
+        $("input[name=chkFormFunction]").each(function() {
             // alert(index + ": " + $( this ).attr('id'));
             var id = $( this ).attr('id');
             if($('#'+id).is(':checked'))
@@ -62,6 +52,7 @@ $(document).ready(function() {
             type: "POST",
             data: {
                 access_token: csrfHash,
+                id:resid,
                 responsibility_name:res,
                 responsibility_ff:form
             },
@@ -84,6 +75,74 @@ $(document).ready(function() {
         });
 
     });
+
+    $('#resTable tbody').on( 'click', '.edit', function () {
+        $("input[name=chkFormFunction]").prop( "checked", false );
+        $("#addModal").modal("show");
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function(){
+            return $(this).text();
+        }).get();
+
+        $("#txtResID").val(data[0]);
+        $("#txtResName").val(data[1]);
+        var mods = data[2];
+        var modsArr = new Array();
+        modsArr = mods.split(',');
+        
+        for (a in modsArr ) {
+            if(modsArr[a]!=''){
+                $("#"+modsArr[a] ).prop( "checked", true );
+            }
+        }
+
+        chkUser();
+        
+    } );
+
+    $('#resTable tbody').on( 'click', '.delete', function () {
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function(){
+            return $(this).text();
+        }).get();
+
+        const id = data[0];
+        
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this responsibility.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              $.ajax({
+                url: "DeleteResponsibility",
+                type: "POST",
+                data: {
+                    access_token: csrfHash,
+                    id:id,
+                },
+                cache: false,
+                success: function(dataResult){
+                    // var dataResult = JSON.parse(dataResult);
+                    swal("Poof! "+dataResult.message, {
+                        icon: "success",
+                    });
+                    table.ajax.reload();
+                },
+            });
+            } else {
+              swal("Your responsibility details is safe!");
+            }
+          });
+
+        
+    } );
+
   });
 
 $('#chkUsersID').click(function(){
@@ -97,9 +156,12 @@ $('#chkUsersID').click(function(){
 });
 
 $('.chkUsers').change(function(){
-    var checkUser = true;
+    chkUser();
+});
 
-    $('.chkUsers').each(function(i, obj) {
+function chkUser(){
+    var checkUser = true;
+    $('.chkUsers').each(function(i) {
         if (i != 0) {
             if ($(this).prop('checked') == false) {
                 checkUser = false;
@@ -113,5 +175,4 @@ $('.chkUsers').change(function(){
     else {
         $('#chkUsersID').prop('checked', false);
     }
-
-});
+}
