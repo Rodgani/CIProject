@@ -10,7 +10,7 @@
                 <i class="fas fa-laugh-wink"></i>
             </div>
             <!-- <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div> -->
-            <div class="sidebar-brand-text mx-3">EMB WFP</div>
+            <div class="sidebar-brand-text mx-3">EMB APP WFP PPMP</div>
         </a>
 
         <!-- Divider -->
@@ -41,9 +41,9 @@
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Users Setting:</h6>
-                    <a class="collapse-item" href="User">Users</a>
-                    <a class="collapse-item" href="forgot-password.html">Profile</a>
-                    <a class="collapse-item" href="Responsibility">Responsibility</a>
+                    <a class="collapse-item 1U" href="User">Users</a>
+                    <a class="collapse-item 1UP" href="forgot-password.html">Profile</a>
+                    <a class="collapse-item 1UR" href="Responsibility">Responsibility</a>
                 </div>
             </div>
         </li>

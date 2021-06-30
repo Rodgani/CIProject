@@ -10,6 +10,8 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use CodeIgniter\Validation\Exceptions\ValidationException;
 use Config\Services;
+use App\Models\User\ResponsibilityModel;
+use App\Models\User\ModulesModel;
 
 /**
  * Class BaseController
@@ -108,11 +110,78 @@ class BaseController extends Controller
         if(!isset($_SESSION['login'])){
 			echo "<script>window.location.href='".base_url()."'</script>";
         }else{
+
+			$sidebar['ff_responsibility'] = $this->getFFResponsibility();
+
             echo view('Layout/Header');
-			echo view('Layout/Sidebar');
+			echo view('Layout/Sidebar',$sidebar);
 			echo view($path,$data);
             echo view('Layout/Footer');
+			
         }
+    }
+
+	public function isAllowed($code){
+		// check if code is in the responsibility array of le user
+		$responsibility_id = $_SESSION['responsibility'];
+		$builder = new ResponsibilityModel();
+		$builder->where('id',$responsibility_id);
+		$getRes = $builder->get()->getRowArray();
+
+		$result = explode(",", $getRes['responsibility_ff']);
+
+		foreach($result as $key => $r){
+			$result[$key] = trim($r);
+		}
+
+		if(!in_array($code, $result)){
+			echo "<script>window.location.href='".base_url()."'</script>";
+		}
+	}
+
+	function getFFResponsibility(){ 
+        
+        $responsibility_id = $_SESSION['responsibility'];
+		$builder = new ResponsibilityModel();
+
+		$builder->select('responsibility_ff');
+		$builder->where('id',$responsibility_id);
+		$result = $builder->get();
+		$row = $result->getRow();
+		
+		if ($row->responsibility_ff==null) {
+			$result = null;
+            echo "<h1>User's Responsibility for this user not set properly. Contact your Administrator to fix the issue.</h1>";
+            echo "<br>";
+            echo "<p style='text-align:center'><a href='Logout'>Continue... </a></p>";
+            exit;
+		}
+		foreach($result->getResultArray() as $r){
+            $result = $r['responsibility_ff'];
+        }
+
+        $result = explode(",", $result);
+
+        foreach($result as $key => $r){
+            $result[$key] = trim($r);
+        }
+
+        $output = '';
+
+		foreach($this->getFormFunction() as $ff){
+			if(!in_array($ff['code'], $result)){
+				$output .= "$('.".$ff['code']."').css('display', 'none');";
+			}
+		}
+
+
+        return $output;
+     }
+     
+     function getFormFunction(){
+		$builder = new ModulesModel();
+		$result = $builder->get()->getResultArray();
+		return $result;
     }
 
 }
