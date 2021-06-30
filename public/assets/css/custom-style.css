@@ -40,3 +40,6 @@
 .margin-15px label input{
     cursor: pointer !important;
 }
+.hide_column {
+    display : none;
+}

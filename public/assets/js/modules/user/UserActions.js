@@ -17,7 +17,8 @@ $(document).ready(function() {
              { data : 'id'}, 
              { data: 'email' },
              { data: 'iis_employee_number' },
-             { data: 'responsibility' },
+             { data: 'responsibility', className: 'hide_column' },
+             { data: 'responsibility_name' },
              { 
                 "mRender": function(data, type, full) {
                     return '<div class="action-center">'+

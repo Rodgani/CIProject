@@ -14,8 +14,11 @@ class UserController extends BaseController
 
 	public function index()
 	{
+		$this->isAllowed('1U');
+		$builder = new ResponsibilityModel();
+
 		$view = "User/UserView";
-		$data[''] = null;
+		$data['resList'] = $builder->get()->getResultArray();
         $layout = $this->Layout($view,$data);
 	}
 
@@ -93,6 +96,8 @@ class UserController extends BaseController
 
 		$builder->orderBy($columnName, $columnSortOrder);
 		$builder->limit($rowperpage,$start);
+		$builder->select('user.*,res.responsibility_name');
+		$builder->join('responsibility as res', 'res.id = user.responsibility');
 		$getUser = $builder->get();
 
 		foreach ($getUser->getResult() as $row)
@@ -101,7 +106,8 @@ class UserController extends BaseController
 				"id"=>$row->id,
 				"email"=>$row->email,
 				"iis_employee_number"=>$row->iis_employee_number,
-				"responsibility"=>$row->responsibility
+				"responsibility"=>$row->responsibility,
+				"responsibility_name"=>$row->responsibility_name
 			); 
 		}
 
@@ -172,6 +178,7 @@ class UserController extends BaseController
 	}
 
 	public function responsibility(){
+		$this->isAllowed('1UR');
 		$builder = new ModulesModel();
 
 		$builder->like('code', '1U');

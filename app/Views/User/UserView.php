@@ -27,7 +27,8 @@
                             <th scope="col">#</th>
                             <th scope="col">Email</th>
                             <th scope="col">IIS Employee Number</th>
-                            <th scope="col">Responsibility</th>
+                            <th scope="col hide_column">Responsibility ID</th>
+                            <th scope="col">Responsibility Name</th>
                             <th scope="col" class="action-center">Actions</th>
                         </tr>
                     </thead>
@@ -84,9 +85,9 @@
                             </div>
                             <select class="custom-select" id="selAccess">
                                 <option selected value="">Responsibility . . .</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <?php foreach($resList as $row){?>
+                                    <option value="<?=$row['id']?>"><?=$row['responsibility_name']?></option>
+                                <?php }?>
                             </select>
                         </div>
                     </div>

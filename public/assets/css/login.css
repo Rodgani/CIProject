@@ -44,7 +44,7 @@ html {
   }
   
   #formContent {
-    opacity: .9;
+    /* opacity: .9; */
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     background: rgb(255, 255, 255);

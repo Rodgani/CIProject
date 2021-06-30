@@ -47,6 +47,7 @@
         <script>
             $(document).ready(function() {
                 $('.alert').hide();
+                <?=$ff_responsibility?>
             });
             function number(t){
                 t.value=t.value.replace(/[^0-9]/g, '');
