@@ -15,7 +15,8 @@ class UserController extends BaseController
 	public function index()
 	{
 		$view = "User/UserView";
-        $layout = $this->Layout($view,null);
+		$data[''] = null;
+        $layout = $this->Layout($view,$data);
 	}
 
 	public function register()
@@ -240,38 +241,69 @@ class UserController extends BaseController
 		return json_encode($response); 
 	}
 
-	public function insertResponsibility(){
+	public function insertUpdateResponsibility(){
 		
-		$rules = [
-            'responsibility_name' => 'required|is_unique[responsibility.responsibility_name]',
-            'responsibility_ff' => 'required'
-        ];
-
         $input = $this->getRequestInput($this->request);
-
-        if (!$this->validateRequest($input, $rules)) {
-            return $this
-                ->getResponse(
-                    $this->validator->getErrors(),
-                    ResponseInterface::HTTP_BAD_REQUEST
-                );
-        }
-
+        
         $resModel = new ResponsibilityModel();
-        $resModel->save($input);
-
-		$id = $resModel->insertID;
-
-		if($id<>null){
+		if($input['id']!=null){
+			$resModel->update($input['id'],$input);
+			$message = "updated";
 			$responsibility =  $input['responsibility_name'];
-		}
+		}else{
+			$rules = [
+				'responsibility_name' => 'required|is_unique[responsibility.responsibility_name]',
+				'responsibility_ff' => 'required'
+			];
 
+			if (!$this->validateRequest($input, $rules)) {
+				return $this
+					->getResponse(
+						$this->validator->getErrors(),
+						ResponseInterface::HTTP_BAD_REQUEST
+					);
+			}
+			$id = $resModel->insertID;
+
+			if($id<>null){
+				$responsibility =  $input['responsibility_name'];
+			}
+
+			$resModel->save($input);
+			$message = "added";
+		}
+        
        	return $this
 			->getResponse(
 				[
-					'message' => 'added successfully',
+					'message' => $message." "."Successfully",
 					'res' => $responsibility
 				]
 			);
+	}
+
+	public function deleteResponsibility(){
+		try {
+
+			$model = new ResponsibilityModel();
+			$input = $this->getRequestInput($this->request);
+			$res = $model->getResById($input['id']);
+            $model->delete($res);
+
+            return $this
+                ->getResponse(
+                    [
+						'message' => "Deleted Successfully"
+                    ]
+                );
+
+        } catch (Exception $exception) {
+            return $this->getResponse(
+                [
+                    'message' => $exception->getMessage()
+                ],
+                ResponseInterface::HTTP_NOT_FOUND
+            );
+        }
 	}
 }

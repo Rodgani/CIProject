@@ -160,7 +160,7 @@ $(document).ready(function() {
                 },
             });
             } else {
-              swal("Your imaginary file is safe!");
+              swal("Your account is safe!");
             }
           });
 

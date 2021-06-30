@@ -14,4 +14,18 @@ class ResponsibilityModel extends Model
         'responsibility_ff',
     ];
     
+    public function getResById(string $id)
+    {
+        $res = $this
+            ->asArray()
+            ->where([
+                'id' => $id
+                ])
+            ->first();
+
+        if (!$res)
+            throw new Exception('Email or Password Incorrect');
+
+            return $res;
+    }
 }

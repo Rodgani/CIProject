@@ -71,7 +71,8 @@ class Filters extends BaseConfig
 				'UpdateUser/*',
 				'DeleteUser/*',
 				'GetResponsibility/*',
-				'Responsibility/*'
+				'Responsibility/*',
+				'DeleteResponsibility/*'
 			],
         ]
 	];

@@ -25,7 +25,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Responsibility</th>
-                            <th scope="col">Modules</th>
+                            <th scope="col">Module Codes</th>
                             <th scope="col" class="action-center">Actions</th>
                         </tr>
                     </thead>
@@ -45,6 +45,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                <input type='hidden' class="form-control" id="txtResID"> 
                 <input type='text' class="form-control" id="txtResName" placeholder="Responsibility Name">  
                 <div class="spacer"></div>
                 <nav class="nav nav-pills nav-fill">
@@ -65,7 +66,7 @@
                         <?php foreach($userLinks as $key => $row){?>
                             <div class="row margin-15px">
                                 <label>
-                                    <input class='chkUsers' id='<?php echo $row["code"]?>' name='chkFormFunction[]' type='checkbox' value='<?php echo $row["code"]?>'>
+                                    <input class='chkUsers' id='<?php echo $row["code"]?>' name='chkFormFunction' type='checkbox' value='<?php echo $row["code"]?>'>
                                     <span><span><?php echo $row['form_function']?></span></span>
                                 </label>  
                             </div>
