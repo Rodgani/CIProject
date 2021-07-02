@@ -44,7 +44,7 @@ $(document).ready(function() {
        // CSRF hash
        
         $.ajax({
-            url: "User",
+            url: "AddUser",
             type: "POST",
             data: {
                 access_token: csrfHash,
@@ -98,11 +98,11 @@ $(document).ready(function() {
         const levelaccess = $("#selAccess").val();
        
         $.ajax({
-            url: "UpdateUser",
+            url: "UpdateUser/"+id,
             type: "POST",
             data: {
                 access_token: csrfHash,
-                id:id,
+                // id:id,
                 iis_employee_number: iisemployeeid,
                 email: email,
                 responsibility:levelaccess	
@@ -145,11 +145,10 @@ $(document).ready(function() {
           .then((willDelete) => {
             if (willDelete) {
               $.ajax({
-                url: "DeleteUser",
-                type: "POST",
+                url: "DeleteUser/"+id,
+                type: "DELETE",
                 data: {
-                    access_token: csrfHash,
-                    id:id,
+                    access_token: csrfHash
                 },
                 cache: false,
                 success: function(dataResult){

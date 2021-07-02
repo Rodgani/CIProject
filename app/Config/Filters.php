@@ -60,20 +60,5 @@ class Filters extends BaseConfig
 	 *
 	 * @var array
 	 */
-	public $filters = [
-		'csrf' => [
-			'before' => [
-				'UserLogin/*',
-				'Home/*',
-				'Logout/*',
-				'User/*',
-				'GetUser/*',
-				'UpdateUser/*',
-				'DeleteUser/*',
-				'GetResponsibility/*',
-				'Responsibility/*',
-				'DeleteResponsibility/*'
-			],
-        ]
-	];
+	public $filters = [];
 }

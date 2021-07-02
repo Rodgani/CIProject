@@ -41,9 +41,9 @@
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Users Setting:</h6>
-                    <a class="collapse-item 1U" href="User">Users</a>
+                    <a class="collapse-item 1U" href="UserIndex">Users</a>
                     <a class="collapse-item 1UP" href="forgot-password.html">Profile</a>
-                    <a class="collapse-item 1UR" href="Responsibility">Responsibility</a>
+                    <a class="collapse-item 1UR" href="ResIndex">Responsibility</a>
                 </div>
             </div>
         </li>

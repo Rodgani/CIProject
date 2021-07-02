@@ -30,6 +30,7 @@ $(document).ready(function() {
     $("#btnAddModal").click(function(){
        $("#txtResID").val('');
        $("#txtResName").val('');
+       $("#chkUsersID").prop( "checked", false );
        $("input[name=chkFormFunction]").prop( "checked", false );
     });
     $( "#btnAdd" ).click(function() {
@@ -48,7 +49,7 @@ $(document).ready(function() {
          
         
         $.ajax({
-            url: "Responsibility",
+            url: "CreateUpdateResponsibility",
             type: "POST",
             data: {
                 access_token: csrfHash,
@@ -120,11 +121,10 @@ $(document).ready(function() {
           .then((willDelete) => {
             if (willDelete) {
               $.ajax({
-                url: "DeleteResponsibility",
-                type: "POST",
+                url: "DeleteResponsibility/"+id,
+                type: "DELETE",
                 data: {
-                    access_token: csrfHash,
-                    id:id,
+                    access_token: csrfHash
                 },
                 cache: false,
                 success: function(dataResult){
