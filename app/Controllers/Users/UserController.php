@@ -121,18 +121,18 @@ class UserController extends BaseController
 		return json_encode($response); 
 	}
 
-	public function update(){
+	public function update($id){
 		try {
 
             $model = new UserModel();
            
 
             $input = $this->getRequestInput($this->request);
-			$model->getUserById($input['id']);
+			$model->getUserById($id);
 
-            $model->update($input['id'], $input);
+            $model->update($id, $input);
 
-            $User = $model->getUserById($input['id']);
+            $User = $model->getUserById($id);
 
             return $this->getResponse(
                 [
@@ -152,12 +152,12 @@ class UserController extends BaseController
         }
 	}
 	
-	public function delete(){
+	public function delete($id){
 		try {
 
             $model = new UserModel();
 			$input = $this->getRequestInput($this->request);
-            $user = $model->getUserById($input['id']);
+            $user = $model->getUserById($id);
             $model->delete($user);
 
             return $this
@@ -177,7 +177,7 @@ class UserController extends BaseController
         }
 	}
 
-	public function responsibility(){
+	public function resIndex(){
 		$this->isAllowed('1UR');
 		$builder = new ModulesModel();
 
@@ -289,12 +289,12 @@ class UserController extends BaseController
 			);
 	}
 
-	public function deleteResponsibility(){
+	public function deleteResponsibility($id){
 		try {
 
 			$model = new ResponsibilityModel();
-			$input = $this->getRequestInput($this->request);
-			$res = $model->getResById($input['id']);
+			// $input = $this->getRequestInput($this->request);
+			$res = $model->getResById($id);
             $model->delete($res);
 
             return $this

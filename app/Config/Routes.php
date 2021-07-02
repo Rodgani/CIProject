@@ -32,9 +32,9 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'LoginController::index');
-$routes->get('Logout', 'LoginController::logout');
-$routes->get('Home', 'HomeController::index');
+$routes->add('/', 'LoginController::index');
+$routes->add('Logout', 'LoginController::logout');
+$routes->add('Home', 'HomeController::index');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
@@ -52,18 +52,20 @@ if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
+
+
 /*user routes*/
-$routes->post('UserLogin', 'LoginController::Login');
-$routes->get('User', 'Users/UserController::index');
-$routes->post('User', 'Users/UserController::register');
-$routes->post('UpdateUser', 'Users/UserController::update');
-$routes->post('GetUser', 'Users/UserController::getUser');
-$routes->post('DeleteUser', 'Users/UserController::delete');
+$routes->add('UserLogin', 'LoginController::Login');
+$routes->add('UserIndex', 'Users\UserController::index');
+$routes->add('GetUser', 'Users\UserController::getUser');
+$routes->add('AddUser', 'Users\UserController::register');
+$routes->add('UpdateUser/(:num)', 'Users\UserController::update/$1');
+$routes->add('DeleteUser/(:num)', 'Users\UserController::delete/$1');
 /*user routes*/
 
 /*responsibility routes*/
-$routes->get('Responsibility', 'Users/UserController::responsibility');
-$routes->post('GetResponsibility', 'Users/UserController::getResponsibility');
-$routes->post('Responsibility', 'Users/UserController::insertUpdateResponsibility');
-$routes->post('DeleteResponsibility', 'Users/UserController::deleteResponsibility');
+$routes->add('ResIndex', 'Users\UserController::resIndex');
+$routes->add('GetResponsibility', 'Users\UserController::getResponsibility');
+$routes->add('CreateUpdateResponsibility', 'Users\UserController::insertUpdateResponsibility');
+$routes->add('DeleteResponsibility/(:num)', 'Users\UserController::deleteResponsibility/$1');
 /*responsibility routes*/
