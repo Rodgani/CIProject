@@ -13,53 +13,59 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Dumping database structure for ci_project_name
-DROP DATABASE IF EXISTS `ci_project_name`;
-CREATE DATABASE IF NOT EXISTS `ci_project_name` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `ci_project_name`;
+-- Dumping database structure for appwfpppmp
+DROP DATABASE IF EXISTS `appwfpppmp`;
+CREATE DATABASE IF NOT EXISTS `appwfpppmp` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `appwfpppmp`;
 
--- Dumping structure for table ci_project_name.module
-DROP TABLE IF EXISTS `module`;
-CREATE TABLE IF NOT EXISTS `module` (
+-- Dumping structure for table appwfpppmp.form_function
+DROP TABLE IF EXISTS `form_function`;
+CREATE TABLE IF NOT EXISTS `form_function` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `module_name` varchar(50) NOT NULL DEFAULT '0',
+  `form_function` varchar(50) NOT NULL DEFAULT '0',
   `code` varchar(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table ci_project_name.module: ~0 rows (approximately)
-/*!40000 ALTER TABLE `module` DISABLE KEYS */;
-/*!40000 ALTER TABLE `module` ENABLE KEYS */;
+-- Dumping data for table appwfpppmp.form_function: ~3 rows (approximately)
+/*!40000 ALTER TABLE `form_function` DISABLE KEYS */;
+INSERT INTO `form_function` (`id`, `form_function`, `code`) VALUES
+	(1, 'User', '1U'),
+	(2, 'Profile', '1UP'),
+	(3, 'Responsibility', '1UR');
+/*!40000 ALTER TABLE `form_function` ENABLE KEYS */;
 
--- Dumping structure for table ci_project_name.responsibility
+-- Dumping structure for table appwfpppmp.responsibility
 DROP TABLE IF EXISTS `responsibility`;
 CREATE TABLE IF NOT EXISTS `responsibility` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `responsibility_name` varchar(15) DEFAULT NULL,
-  `resposibility_ff` text NOT NULL,
+  `responsibility_ff` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table ci_project_name.responsibility: ~0 rows (approximately)
+-- Dumping data for table appwfpppmp.responsibility: ~1 rows (approximately)
 /*!40000 ALTER TABLE `responsibility` DISABLE KEYS */;
+INSERT INTO `responsibility` (`id`, `responsibility_name`, `responsibility_ff`) VALUES
+	(1, 'Super Admin', '1U,1UP,1UR,');
 /*!40000 ALTER TABLE `responsibility` ENABLE KEYS */;
 
--- Dumping structure for table ci_project_name.user
+-- Dumping structure for table appwfpppmp.user
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(50) DEFAULT NULL,
-  `username` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `responsibility_id` int(11) DEFAULT NULL,
+  `iis_employee_number` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(60) DEFAULT NULL,
+  `responsibility` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `user_id` (`iis_employee_number`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table ci_project_name.user: ~1 rows (approximately)
+-- Dumping data for table appwfpppmp.user: ~1 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `user_id`, `username`, `password`, `responsibility_id`) VALUES
-	(1, 'user01', 'rod123', 'rod123', 1);
+INSERT INTO `user` (`id`, `iis_employee_number`, `email`, `password`, `responsibility`) VALUES
+	(6, '3399', 'rod.ganancial@gmail.com', '$2y$10$gylPe1niWbi8iMgDXq5iO.YJcd.ao4SxSv51OymLWAmJTCHh45Ptm', 1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
