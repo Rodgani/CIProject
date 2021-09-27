@@ -14,12 +14,11 @@ class UserController extends BaseController
 
 	public function index()
 	{
-		$this->isAllowed('1U');
 		$builder = new ResponsibilityModel();
-
 		$view = "User/UserView";
 		$data['resList'] = $builder->get()->getResultArray();
         $layout = $this->Layout($view,$data);
+		$this->isAllowed('1U');
 	}
 
 	public function register()
@@ -181,7 +180,7 @@ class UserController extends BaseController
 	}
 
 	public function resIndex(){
-		$this->isAllowed('1UR');
+		
 		$builder = new ModulesModel();
 
 		$builder->like('code', '1U');
@@ -189,6 +188,7 @@ class UserController extends BaseController
 
 		$view = "User/ResponsibilityView";
         $layout = $this->Layout($view,$data);
+		$this->isAllowed('1UR');
 	}
 
 	public function getResponsibility(){
