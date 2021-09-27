@@ -159,13 +159,13 @@ class UserController extends BaseController
 		try {
 
             $model = new UserModel();
-			
+			$User = $model->getUserById($id);
             $model->delete($id);
 
             return $this
                 ->getResponse(
                     [
-						'message' =>  $user['email']." Deleted Successfully"
+						'message' =>  $User['email']." Deleted Successfully"
                     ]
                 );
 
