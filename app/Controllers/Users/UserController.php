@@ -57,6 +57,7 @@ class UserController extends BaseController
     }
 
 	public function getUser(){
+		$iis = $_SESSION['iis_employee_number'];
 		$response = array();
 		## Read value
 		$postData = $this->getRequestInput($this->request);
@@ -78,6 +79,7 @@ class UserController extends BaseController
 		}
 
 		$count_no_filter = $builder->countAll();
+		$builder->where("iis_employee_number!=",$iis);
 		$totalRecords = $count_no_filter;
 
 	
@@ -85,6 +87,7 @@ class UserController extends BaseController
 			$builder->where($searchQuery);
 		}
 		$count_with_filter = $builder->countAll();
+		$builder->where("iis_employee_number!=",$iis);
 		$totalRecordwithFilter = $count_with_filter;
 		
 		$data = array();
@@ -98,6 +101,7 @@ class UserController extends BaseController
 		$builder->limit($rowperpage,$start);
 		$builder->select('user.*,res.responsibility_name');
 		$builder->join('responsibility as res', 'res.id = user.responsibility');
+		$builder->where("iis_employee_number!=",$iis);
 		$getUser = $builder->get();
 
 		foreach ($getUser->getResult() as $row)
@@ -156,9 +160,8 @@ class UserController extends BaseController
 		try {
 
             $model = new UserModel();
-			$input = $this->getRequestInput($this->request);
-            $user = $model->getUserById($id);
-            $model->delete($user);
+			
+            $model->delete($id);
 
             return $this
                 ->getResponse(
@@ -249,10 +252,11 @@ class UserController extends BaseController
 	}
 
 	public function insertUpdateResponsibility(){
-		
+
         $input = $this->getRequestInput($this->request);
         
         $resModel = new ResponsibilityModel();
+	
 		if($input['id']!=null){
 			$resModel->update($input['id'],$input);
 			$message = "updated";
@@ -270,14 +274,15 @@ class UserController extends BaseController
 						ResponseInterface::HTTP_BAD_REQUEST
 					);
 			}
+			
+			$resModel->save($input);
+			$message = "added";
+
 			$id = $resModel->insertID;
 
 			if($id<>null){
-				$responsibility =  $input['responsibility_name'];
+				$responsibility = $input['responsibility_name'];
 			}
-
-			$resModel->save($input);
-			$message = "added";
 		}
         
        	return $this
@@ -293,9 +298,7 @@ class UserController extends BaseController
 		try {
 
 			$model = new ResponsibilityModel();
-			// $input = $this->getRequestInput($this->request);
-			$res = $model->getResById($id);
-            $model->delete($res);
+            $model->delete($id);
 
             return $this
                 ->getResponse(

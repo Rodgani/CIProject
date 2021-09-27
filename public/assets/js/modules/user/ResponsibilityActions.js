@@ -20,8 +20,8 @@ $(document).ready(function() {
              { 
                 "mRender": function(data, type, full) {
                     return '<div class="action-center">'+
-                            '<a class="btn btn-info btn-sm btn-circle mini-right-pad edit"><i class="far fa-edit"></i></a>'+
-                            '<a class="btn btn-danger btn-sm btn-circle delete"><i class="fas fa-trash"></i></a></div>';
+                            '<a class="btn btn-info btn-sm btn-circle mini-right-pad edit"><i class="far fa-edit"></i></a></div>';
+                            // '<a class="btn btn-danger btn-sm btn-circle delete"><i class="fas fa-trash"></i></a></div>';
                 }
             },
           ],
