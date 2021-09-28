@@ -41,6 +41,7 @@ class LoginController extends BaseController
 			$_SESSION['responsibility'] = $user['responsibility'];
 			$_SESSION['iis_employee_number'] = $user['iis_employee_number'];
 	     	$_SESSION['login'] = TRUE;
+			$_SESSION['u_email'] = $input['email'];
 			
 			return $this
 			->getResponse(
@@ -65,7 +66,7 @@ class LoginController extends BaseController
 		
 		if(isset($_SESSION['login'])){
 				
-			$array_items = ['iis_employee_number','responsibility','login'];
+			$array_items = ['iis_employee_number','responsibility','login','u_email'];
 			$this->session->remove($array_items);
 
 			//$this->session->sess_destroy();
